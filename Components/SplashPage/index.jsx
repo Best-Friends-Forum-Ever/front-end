@@ -8,15 +8,15 @@ const SplashPage = () => {
   const navigation = useNavigation();
 
   const handleLoginPress = () => {
-    navigation.navigate('../AuthPage/loginForm.jsx'); // Navigate to login
+    navigation.navigate('Login'); // Navigate to login
   };
 
   const handleSignUpPress = () => {
-    navigation.navigate('../AuthPage/loginForm.jsx'); // Navigate to login
+    navigation.navigate('Signup'); // Navigate to login
   };
 
   const handleBypass = () => {
-    navigation.navigate('../HomePage/index.jsx'); // Navigate to home page
+    navigation.navigate('HomePage'); // Navigate to home page
   }
 
   return (
