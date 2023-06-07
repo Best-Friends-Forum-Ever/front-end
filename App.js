@@ -15,11 +15,12 @@ export default function App() {
       <NavigationContainer>
         <PaperProvider>
           <Stack.Navigator
-            initialRouteName='Signup'>
+            initialRouteName='SplashPage'>
             <Stack.Screen name="Signup" component={Signup} />
-            {/* <Stack.Screen name="SplashPage" component={SplashPage} />
+            <Stack.Screen name=""
+            <Stack.Screen name="SplashPage" component={SplashPage} />
             <Stack.Screen name="HomePage" component={HomePage} />
-            <Stack.Screen name="ThreadPage" component={ThreadPage} /> */}
+            <Stack.Screen name="ThreadPage" component={ThreadPage} />
           </Stack.Navigator>
         </PaperProvider>
       </NavigationContainer>
