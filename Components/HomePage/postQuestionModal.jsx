@@ -1,44 +1,32 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import { Modal, Portal, Button, TextInput } from 'react-native-paper';
+import { useSelector, useDispatch } from 'react-redux';
+import { addQuestion } from '../../state/middleware/addQuestion';
 
-const card = (
-	<React.Fragment>
-		<CardContent>
-			<Box
-				component="form"
-				sx={{
-					'& .MuiTextField-root': { m: 1, width: '25ch' },
-				}}
-				noValidate
-				autoComplete="off"
-			>
-				<div>
-					<TextField
-						id="standard-textarea"
-						label="What is your question?"
-						placeholder="What is the meaning of life?"
-						multiline
-						maxRows={4}
-						variant="standard"
-					/>
-				</div>
-			</Box>
-		</CardContent>
-		<CardActions>
-			<Button>Post</Button>
-		</CardActions>
-	</React.Fragment>
-);
+function PostQuestionModal ({visible, hideModal}){
+	let profile = useSelector(currentState => currentState.profile.list);
+	const [question, setQuestion] = React.useState("");
+	const dispatch = useDispatch();
+	const containerStyle = {backgroundColor: 'white', padding: 20};
 
-export default function PostQuestion() {
+	function handleSubmit () {
+		dispatch(addQuestion(question));
+	}
+
 	return (
-		<Box sx={{ minWidth: 275 }}>
-			<Card variant="outlined">{card}</Card>
-		</Box>
-	);
+    <Portal>
+      <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+				<TextInput
+      		label="Add Question Here"
+      		value={question}
+      		onChangeText={text => setQuestion(text)}
+    		/>
+				<Button mode="contained" onPress={handleSubmit()}>
+    			Submit
+  			</Button>
+      </Modal>
+    </Portal>
+	)	
 }
+
+export default PostQuestionModal;
