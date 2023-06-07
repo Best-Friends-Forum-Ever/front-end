@@ -7,10 +7,13 @@ import ThreadPage from './Components/ThreadPage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Signup from './Components/AuthPage/registerForm';
+import { Provider } from 'react-redux';
+import createStore from './state'
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
+  <Provider store={createStore()}>            
     <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer>
         <PaperProvider>
@@ -25,6 +28,7 @@ export default function App() {
         </PaperProvider>
       </NavigationContainer>
     </SafeAreaView>
+  </Provider>
   );
 }
 
