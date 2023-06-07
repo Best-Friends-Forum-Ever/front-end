@@ -1,27 +1,44 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
+import { Avatar, Button, Card, Text, List } from 'react-native-paper';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAnswers } from '../../state/middleware/fetchAnswers';
+import { Link } from '@react-navigation/native';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
-export default function QuestionStack() {
+function HomePage () {
+  let questions = useSelector(currentState => currentState.questions.list);
+  let loggedIn = useSelector(currentState => currentState.profile.loggedIn);
+  const dispatch = useDispatch();
+
+  let questionsToScreen = questions.map(question => {
+    return(
+      <List.Item
+        title={question.content}
+        left={props => <List.Icon {...props} icon="folder" />}
+      >
+        <Link onPress={() => handleOpenQuesiton(question)} to={{ screen: 'ThreadPage'}}>Open</Link>
+      </List.Item>
+    )
+  });
+
+  function handleOpenQuesiton (question) {
+    dispatch(fetchAnswers(question));
+  }
+
   return (
-    <Box sx={{ width: '100%' }}>
-      <Stack spacing={1}>
-        <Item>Question 1</Item>
-        <Item>Question 2</Item>
-        <Item>Question 3</Item>
-      </Stack>
-			<Button variant="contained" color="">Post a Question</Button>
-    </Box>
-  );
+    <Card>
+      <Card.Title title="Forum" subtitle="Questions/Answers" left={LeftContent} />
+      <Card.Content>
+        {questionsToScreen}
+      </Card.Content>
+      {loggedIn &&
+        (<Card.Actions>
+          <Button>Post Question</Button>
+        </Card.Actions>)
+      }
+    </Card>
+  )
 }
+
+export default HomePage;
