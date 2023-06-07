@@ -4,8 +4,10 @@ import SplashPage from './Components/SplashPage';
 import HomePage from './Components/HomePage';
 import ThreadPage from './Components/ThreadPage';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default function App() {
+  const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <SafeAreaView>
