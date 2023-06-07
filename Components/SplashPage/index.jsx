@@ -2,8 +2,6 @@ import * as React from 'react';
 import { Avatar, Button, Card, View } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
-
 const SplashPage = () => {
   const navigation = useNavigation();
 
@@ -24,12 +22,7 @@ const SplashPage = () => {
       <Card.Title
         title="Welcome"
         subtitle="Please make a selection to continue"
-        left={LeftContent}
       />
-      {/* <Card.Content>
-          <Text variant="titleLarge">Forum</Text>
-          <Text variant="bodyMedium">Questions/Answers</Text>
-        </Card.Content> */}
       <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
       <Card.Actions>
         <Button
