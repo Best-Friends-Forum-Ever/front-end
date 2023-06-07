@@ -4,6 +4,7 @@ import { PaperProvider } from 'react-native-paper';
 import SplashPage from './Components/SplashPage';
 import HomePage from './Components/HomePage';
 import ThreadPage from './Components/ThreadPage';
+import Login from './Components/AuthPage/loginForm';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Signup from './Components/AuthPage/registerForm';
@@ -20,6 +21,7 @@ export default function App() {
             <Stack.Navigator
               initialRouteName='SplashPage'>
               <Stack.Screen name="Signup" component={Signup} />
+              <Stack.Screen name="Login" component={Login} />
               <Stack.Screen name="SplashPage" component={SplashPage} />
               <Stack.Screen name="HomePage" component={HomePage} />
               <Stack.Screen name="ThreadPage" component={ThreadPage} />

@@ -9,7 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export default function TextFields() {
+export default function Login() {
 	const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
