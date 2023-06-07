@@ -7,23 +7,27 @@ import ThreadPage from './Components/ThreadPage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Signup from './Components/AuthPage/registerForm';
+import { Provider } from 'react-redux';
+import createStore from './state'
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <NavigationContainer>
-        <PaperProvider>
-          <Stack.Navigator
-            initialRouteName='Signup'>
-            <Stack.Screen name="Signup" component={Signup} />
-            {/* <Stack.Screen name="SplashPage" component={SplashPage} />
+    <Provider store={createStore()}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <NavigationContainer>
+          <PaperProvider>
+            <Stack.Navigator
+              initialRouteName='Signup'>
+              <Stack.Screen name="Signup" component={Signup} />
+              {/* <Stack.Screen name="SplashPage" component={SplashPage} />
             <Stack.Screen name="HomePage" component={HomePage} />
             <Stack.Screen name="ThreadPage" component={ThreadPage} /> */}
-          </Stack.Navigator>
-        </PaperProvider>
-      </NavigationContainer>
-    </SafeAreaView>
+            </Stack.Navigator>
+          </PaperProvider>
+        </NavigationContainer>
+      </SafeAreaView>
+    </Provider>
   );
 }
 
