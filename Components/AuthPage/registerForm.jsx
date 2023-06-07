@@ -2,12 +2,15 @@ import { useState } from 'react';
 import * as React from 'react';
 import { Card, TextInput, Button } from 'react-native-paper';
 import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigation = useNavigation();
 
   const register = async function () {
 
@@ -22,15 +25,17 @@ const Signup = () => {
       }),
     })
       .then((response) => {
-        // Parse.User.signUp returns the already created ParseUser object if successful
         Alert.alert(
           "Success!",
-          `User ${username} was successfully created!`
+          `User ${username} was successfully created!`,
+          [{
+            text: "OK",
+            onPress: () => navigation.navigate('HomePage')
+          }]
         );
         return true;
       })
       .catch((error) => {
-        // signUp can fail if any parameter is blank or failed an uniqueness check on the server
         Alert.alert("Error!", error.message);
         return false;
       });
@@ -40,33 +45,33 @@ const Signup = () => {
     <Card>
       <TextInput
         mode="outlined"
-        label="firstName"
-        value={username}
+        label="First Name"
+        value={firstName}
         placelabholder={"First Name"}
         onChangeText={(text) => setFirstName(text)}
       />
       <TextInput
         mode="outlined"
-        label="lastName"
-        value={password}
+        label="Last Name"
+        value={lastName}
         placeholder={"Last Name"}
         onChangeText={(text) => setLastName(text)}
       />
       <TextInput
         mode="outlined"
-        label="email"
+        label="Email"
         value={username}
         placeholder={"Email"}
         onChangeText={(text) => setUsername(text)}
       />
       <TextInput
         mode="outlined"
-        label="password"
+        label="Password"
         value={password}
         placeholder={"Password"}
         onChangeText={(text) => setPassword(text)}
       />
-      <Button placeholder={"Sign Up"} onPress={() => register()} />
+      <Button mode="elevated" onPress={() => register()}>Sign up!</Button>
     </Card>
   );
 };
