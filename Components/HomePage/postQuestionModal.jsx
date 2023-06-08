@@ -4,13 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addQuestion } from '../../state/middleware/addQuestion';
 
 function PostQuestionModal ({visible, hideModal}){
-	let profile = useSelector(currentState => currentState.profile.list);
+	let token = useSelector(currentState => currentState.profile.token);
 	const [question, setQuestion] = React.useState("");
 	const dispatch = useDispatch();
 	const containerStyle = {backgroundColor: 'white', padding: 20};
 
 	function handleSubmit () {
-		dispatch(addQuestion(question));
+		dispatch(addQuestion(question, token));
 	}
 
 	return (
