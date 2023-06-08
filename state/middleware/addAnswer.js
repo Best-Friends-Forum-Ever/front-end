@@ -1,9 +1,9 @@
-export const addAnswer = (questionID, answer) => async (dispatch) => {
-  let response = await fetch(`https://ourRenderSite.com/QUESTIONS/${questionID}`,{
+export const addAnswer = (questionId, answer) => async (dispatch) => {
+  let response = await fetch(`https://bfff.onrender.com/forum/answer`, {
     method: 'POST',
     //need to somehow send in the profile token
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(answer),
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ content: answer, questionId: questionId }),
   });
   let data = await response.json();
   console.log(data);

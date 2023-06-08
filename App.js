@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
-import { useState } from 'react';
 import { Provider } from 'react-redux';
 import createStore from './state';
 import AppNavigator from './main';
