@@ -2,42 +2,51 @@ import * as React from 'react';
 import { Avatar, Button, Card, Text, List } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { TouchableRipple } from 'react-native-paper';
 import { fetchAnswers } from '../../state/middleware/fetchAnswers';
 import { fetchQuestions } from '../../state/middleware/fetchQuestions';
 import { Link } from '@react-navigation/native';
 import PostQuestionModal from './postQuestionModal';
+import { useNavigation } from '@react-navigation/native';
 
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
 function HomePage() {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   let questions = useSelector(currentState => currentState.questions.list);
   let loggedIn = useSelector(currentState => currentState.profile.loggedIn);
-  const dispatch = useDispatch();
-
-  console.log(questions);
 
   const [visible, setVisible] = React.useState(false);
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
   let questionsToScreen = [];
+
   if (questions) {
     questionsToScreen = questions.map((question, idx) => {
       return (
-        <List.Item
+        <TouchableRipple
+          onPress={() => handleSelectedQuestion(question)}
           key={idx}
-          title={question.content}
-          left={props => <List.Icon {...props} icon="folder" />}
         >
-          <Link onPress={() => handleOpenQuesiton(question)} to={{ screen: 'ThreadPage' }}>Open</Link>
-        </List.Item>
+          <List.Item
+            title={question.content}
+            left={props => <List.Icon {...props} icon="folder" />}
+          />
+        </TouchableRipple>
       )
     });
   }
 
-  function handleOpenQuesiton(question) {
-    dispatch(fetchAnswers(question));
-  }
+  const handleSelectedQuestion = (question) => {
+    dispatch( {
+      type: 'SELECT_QUESTION',
+      payload: question
+    });
+    navigation.navigate('ThreadPage'); // Navigate to login
+  };
 
   useEffect(() => {
     dispatch(fetchQuestions());
@@ -50,7 +59,8 @@ function HomePage() {
       <Card.Content>
         {questionsToScreen}
       </Card.Content>
-      {loggedIn &&
+      {
+        loggedIn &&
         (<Card.Actions>
           <PostQuestionModal
             visible={visible}
@@ -70,7 +80,7 @@ function HomePage() {
             Post Question
           </Button>
         </Card.Actions> */}
-    </Card>
+    </Card >
   )
 }
 
