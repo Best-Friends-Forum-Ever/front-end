@@ -7,6 +7,9 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+ // initialize new state variable 'token' using 'useState('')' to store the token retrieved from local storage
+  const [token, setToken] = useState(''); // Initialize token state
+
   const navigation = useNavigation();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -15,29 +18,34 @@ export default function LoginForm() {
     try {
       // Perform login logic here using username and password
       // Example: Make a fetch call to your backend API
-      const response = await fetch('your-backend-login-url', {
+      const response = await fetch('https://bfff.onrender.com/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username,
-          password,
+          "email": username,
+          "password": password
         }),
       });
 
       // Handle the response from the backend
       if (response.ok) {
         const data = await response.json();
-        const token = data.token;
+        const newtoken = data.token;
 
         // Reset username and password fields
         setUsername('');
         setPassword('');
 
         // Save the token to local storage or secure storage
+        localStorage.setItem('token', newtoken);
         // Example: AsyncStorage.setItem('token', token);
 
+
+        // Update the token state
+        setToken(newtoken);
+        
         // Navigate to 'Home' screen after successful login
         navigation.reset({
           index: 0,
