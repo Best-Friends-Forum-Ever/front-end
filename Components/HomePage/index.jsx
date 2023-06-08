@@ -12,6 +12,8 @@ const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 function HomePage () {
   let questions = useSelector(currentState => currentState.questions.list);
   let loggedIn = useSelector(currentState => currentState.profile.loggedIn);
+  let profile = useSelector(currentState => currentState.profile);
+  console.log(profile);
   const dispatch = useDispatch();
 
   const [visible, setVisible] = React.useState(false);
@@ -47,7 +49,7 @@ function HomePage () {
       <Card.Content>
         {questionsToScreen}
       </Card.Content>
-      {/* {loggedIn &&
+      {loggedIn &&
         (<Card.Actions>
           <PostQuestionModal
             visible={visible}
@@ -57,8 +59,8 @@ function HomePage () {
             Post Question
           </Button>
         </Card.Actions>)
-      } */}
-      <Card.Actions>
+      }
+      {/* <Card.Actions>
           <PostQuestionModal
             visible={visible}
             hideModal={hideModal}
@@ -66,7 +68,7 @@ function HomePage () {
           <Button style={{marginTop: 30}} onPress={showModal}>
             Post Question
           </Button>
-        </Card.Actions>
+        </Card.Actions> */}
     </Card>
   )
 }

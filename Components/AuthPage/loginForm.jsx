@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { TextInput, Button, IconButton, Card } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
- // initialize new state variable 'token' using 'useState('')' to store the token retrieved from local storage
-  const [token, setToken] = useState(''); // Initialize token state
+  const dispatch = useDispatch();
 
   const navigation = useNavigation();
 
@@ -33,23 +33,31 @@ export default function LoginForm() {
       if (response.ok) {
         const data = await response.json();
         const newtoken = data.token;
+        const user = data.user;
+        let userName = user.firstName + ' '+ user.lastName;
+        let profile = {
+          name: userName,
+          email: user.email,
+          token: newtoken,
+        }
 
         // Reset username and password fields
         setUsername('');
         setPassword('');
 
         // Save the token to local storage or secure storage
-        localStorage.setItem('token', newtoken);
-        // Example: AsyncStorage.setItem('token', token);
+        //localStorage.setItem('token', newtoken);
 
-
-        // Update the token state
-        setToken(newtoken);
+        // Save profile to state
+        dispatch({
+          type: 'LOG_IN',
+          payload: profile,
+        });
         
         // Navigate to 'Home' screen after successful login
         navigation.reset({
           index: 0,
-          routes: [{ name: 'Home' }],
+          routes: [{ name: 'HomePage' }],
         });
       } else {
         // Handle login error, display appropriate message to the user
