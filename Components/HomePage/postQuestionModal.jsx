@@ -21,7 +21,7 @@ function PostQuestionModal ({visible, hideModal}){
       		value={question}
       		onChangeText={text => setQuestion(text)}
     		/>
-				<Button mode="contained" onPress={handleSubmit()}>
+				<Button mode="contained" onPress={() => handleSubmit()}>
     			Submit
   			</Button>
       </Modal>
