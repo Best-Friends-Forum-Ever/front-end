@@ -1,41 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
-import SplashPage from './Components/SplashPage';
-import HomePage from './Components/HomePage';
-import ThreadPage from './Components/ThreadPage';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Signup from './Components/AuthPage/registerForm';
+import { useState } from 'react';
 import { Provider } from 'react-redux';
-import createStore from './state'
+import createStore from './state';
+import AppNavigator from './main';
+
+// import { useFonts, Marcellus } from '@expo-google-fonts/marcellus';
 
 export default function App() {
-  const Stack = createNativeStackNavigator();
+  // // fonts
+  // let [fontsLoaded] = useFonts({
+  //   Marcellus,
+  // });
+
+  // if (!fontsLoaded) {
+  //   return null;
+  // }
+
   return (
     <Provider store={createStore()}>
       <SafeAreaView style={{ flex: 1 }}>
-        <NavigationContainer>
-          <PaperProvider>
-            <Stack.Navigator
-              initialRouteName='SplashPage'>
-              <Stack.Screen name="Signup" component={Signup} />
-              <Stack.Screen name="SplashPage" component={SplashPage} />
-              <Stack.Screen name="HomePage" component={HomePage} />
-              <Stack.Screen name="ThreadPage" component={ThreadPage} />
-            </Stack.Navigator>
-          </PaperProvider>
-        </NavigationContainer>
+        <PaperProvider>
+          <AppNavigator/>
+        </PaperProvider>
       </SafeAreaView>
     </Provider>
-  );
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#290d01',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

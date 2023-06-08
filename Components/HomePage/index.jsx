@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchAnswers } from '../../state/middleware/fetchAnswers';
 import { Link } from '@react-navigation/native';
 
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
-
 function HomePage () {
   let questions = useSelector(currentState => currentState.questions.list);
   let loggedIn = useSelector(currentState => currentState.profile.loggedIn);
@@ -15,7 +13,7 @@ function HomePage () {
     return(
       <List.Item
         title={question.content}
-        left={props => <List.Icon {...props} icon="folder" />}
+        left={props => <List.Icon {...props}/>}
       >
         <Link onPress={() => handleOpenQuesiton(question)} to={{ screen: 'ThreadPage'}}>Open</Link>
       </List.Item>
@@ -28,7 +26,7 @@ function HomePage () {
 
   return (
     <Card>
-      <Card.Title title="Forum" subtitle="Questions/Answers" left={LeftContent} />
+      <Card.Title title="Forum" subtitle="Questions/Answers"/>
       <Card.Content>
         {questionsToScreen}
       </Card.Content>
