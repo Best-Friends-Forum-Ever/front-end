@@ -7,9 +7,8 @@ import { fetchQuestions } from '../../state/middleware/fetchQuestions';
 import { Link } from '@react-navigation/native';
 import PostQuestionModal from './postQuestionModal';
 
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+function HomePage () {
 
-function HomePage() {
   let questions = useSelector(currentState => currentState.questions.list);
   let loggedIn = useSelector(currentState => currentState.profile.loggedIn);
   const dispatch = useDispatch();
@@ -46,7 +45,7 @@ function HomePage() {
 
   return (
     <Card>
-      <Card.Title title="Forum" subtitle="Questions/Answers" left={LeftContent} />
+      <Card.Title title="Forum" subtitle="Questions/Answers"/>
       <Card.Content>
         {questionsToScreen}
       </Card.Content>
