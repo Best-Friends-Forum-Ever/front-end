@@ -30,7 +30,7 @@ const Signup = () => {
           `User ${username} was successfully created!`,
           [{
             text: "OK",
-            onPress: () => navigation.navigate('HomePage')
+            onPress: () => navigation.navigate('SplashPage')
           }]
         );
         return true;
