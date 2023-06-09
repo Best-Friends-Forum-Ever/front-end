@@ -9,8 +9,6 @@ import { Link } from '@react-navigation/native';
 import PostQuestionModal from './postQuestionModal';
 import { useNavigation } from '@react-navigation/native';
 
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
-
 function HomePage() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -57,7 +55,7 @@ function HomePage() {
 
   return (
     <Card>
-      <Card.Title title="Forum" subtitle="Questions/Answers" left={LeftContent} />
+      <Card.Title title="Forum" subtitle="Questions/Answers"/>
       <Card.Content>
         {questionsToScreen}
       </Card.Content>
