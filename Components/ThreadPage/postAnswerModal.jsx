@@ -1,44 +1,33 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import { Modal, Portal, Button, TextInput } from 'react-native-paper';
+import { useSelector, useDispatch } from 'react-redux';
+import { addAnswer } from '../../state/middleware/addAnswer';
 
-const card = (
-	<React.Fragment>
-		<CardContent>
-			<Box
-				component="form"
-				sx={{
-					'& .MuiTextField-root': { m: 1, width: '25ch' },
-				}}
-				noValidate
-				autoComplete="off"
-			>
-				<div>
-					<TextField
-						id="standard-textarea"
-						label="Share you wisdom with the world"
-						placeholder="42."
-						multiline
-						maxRows={4}
-						variant="standard"
-					/>
-				</div>
-			</Box>
-		</CardContent>
-		<CardActions>
-			<Button>Post</Button>
-		</CardActions>
-	</React.Fragment>
-);
+function PostAnswerModal ({visible, hideModal}){
+	let token = useSelector(currentState => currentState.profile.token);
+	let selectedQuestion = useSelector(currentState => currentState.questions.selectedQuestion);
+	const [answer, setAnswer] = React.useState("");
+	const dispatch = useDispatch();
+	const containerStyle = {backgroundColor: 'white', padding: 20};
 
-export default function PostAnswer() {
+	function handleSubmit () {
+		dispatch(addAnswer(selectedQuestion, answer, token));
+	}
+
 	return (
-		<Box sx={{ minWidth: 275 }}>
-			<Card variant="outlined">{card}</Card>
-		</Box>
-	);
+    <Portal>
+      <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+				<TextInput
+      		label="Add Answer Here"
+      		value={answer}
+      		onChangeText={text => setAnswer(text)}
+    		/>
+				<Button mode="contained" onPress={() => handleSubmit()}>
+    			Submit
+  			</Button>
+      </Modal>
+    </Portal>
+	)	
 }
+
+export default PostAnswerModal;

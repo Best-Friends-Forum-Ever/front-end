@@ -1,12 +1,11 @@
 export const fetchAnswers = (question) => async (dispatch) => {
-  let response = await fetch(`https://ourRenderSite.com/QUESTIONS/${question._id}`);
-  let data = await response.json();
-  let answers = data.results;
-
-  dispatch({
-    type: 'SELECT_QUESTION',
-    payload: question,
-  })
+  let response = await fetch(`https://bfff.onrender.com/forum/${question._id}/answers`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  });
+  let answers = await response.json();
 
   dispatch({
     type: 'FETCH_ANSWERS',

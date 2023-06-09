@@ -40,12 +40,14 @@ function HomePage() {
     });
   }
 
-  const handleSelectedQuestion = (question) => {
-    dispatch( {
+  const handleSelectedQuestion = (question, token) => {
+    console.log('Question;',question);
+    dispatch({
       type: 'SELECT_QUESTION',
-      payload: question
+      payload: question,
     });
-    navigation.navigate('ThreadPage'); // Navigate to login
+    dispatch(fetchAnswers(question));
+    navigation.navigate('ThreadPage');
   };
 
   useEffect(() => {
@@ -71,15 +73,6 @@ function HomePage() {
           </Button>
         </Card.Actions>)
       }
-      {/* <Card.Actions>
-          <PostQuestionModal
-            visible={visible}
-            hideModal={hideModal}
-            />
-          <Button style={{marginTop: 30}} onPress={showModal}>
-            Post Question
-          </Button>
-        </Card.Actions> */}
     </Card >
   )
 }
