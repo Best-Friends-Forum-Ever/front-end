@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {View} from 'react-native';
 import PostAnswerModal from './postAnswerModal';
 
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+// const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
 function ThreadPage () {
   let selectedQuestion = useSelector(currentState => currentState.questions.selectedQuestion);
@@ -22,7 +22,7 @@ function ThreadPage () {
         <List.Item
           title={answer.content}
           key={idx}
-          left={props => <List.Icon {...props} icon="folder" />}
+          left={props => <List.Icon {...props} icon="star" />}
         />
       )
     })
@@ -31,7 +31,7 @@ function ThreadPage () {
   return(
     <View style={{ padding: 16 }}>
       <Card>
-        <Card.Title title={JSON.stringify(selectedQuestion.content)} left={LeftContent} />
+        <Card.Title title={JSON.stringify(selectedQuestion.content)} />
         <Card.Content>
           {answersToScreen}
         </Card.Content>
