@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Button, Card, } from 'react-native-paper';
+import { Button, IconButton, Card, Switch } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const SplashPage = () => {
 
@@ -26,6 +27,8 @@ const SplashPage = () => {
       type: "TOGGLE_DISPLAY"
     })
   };
+
+  let isDarkMode = useSelector(currentState => currentState.settings.isDarkMode);
 
   return (
     <Card mode="contained">
@@ -57,9 +60,10 @@ const SplashPage = () => {
         >
           Continue as Guest
         </Button>
-        <Button
-          icon="brightness-4"
-          onPress={toggleDarkMode}
+        <Switch
+          // icon="brightness-4"
+          value={isDarkMode}
+          onValueChange={toggleDarkMode}
         />
       </Card.Actions>
     </Card>
