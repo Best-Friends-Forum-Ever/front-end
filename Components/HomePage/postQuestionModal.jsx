@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Modal, Portal, Button, TextInput } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
+import { fetchQuestions } from '../../state/middleware/fetchQuestions';
 import { addQuestion } from '../../state/middleware/addQuestion';
 
 function PostQuestionModal ({visible, hideModal}){
@@ -11,6 +12,8 @@ function PostQuestionModal ({visible, hideModal}){
 
 	function handleSubmit () {
 		dispatch(addQuestion(question, token));
+		dispatch(fetchQuestions());
+		hideModal();
 	}
 
 	return (

@@ -12,8 +12,8 @@ export const addQuestion = (question, token) => async (dispatch) => {
   let data = await response.json();
   console.log(data);
 
-  dispatch({
-    type: 'ADD_QUESTION',
-    payload: question,
-  });
+  // dispatch({
+  //   type: 'ADD_QUESTION',
+  //   payload: question,
+  // });
 }
