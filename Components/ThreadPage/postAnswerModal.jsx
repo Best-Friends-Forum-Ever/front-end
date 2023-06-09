@@ -14,6 +14,7 @@ function PostAnswerModal ({visible, hideModal}){
 	function handleSubmit () {
 		dispatch(addAnswer(selectedQuestion, answer, token));
 		dispatch(fetchAnswers(selectedQuestion));
+		setAnswer('');
 		hideModal();
 	}
 
