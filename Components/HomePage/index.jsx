@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { TouchableRipple } from 'react-native-paper';
 import { fetchAnswers } from '../../state/middleware/fetchAnswers';
 import { fetchQuestions } from '../../state/middleware/fetchQuestions';
-import { Link } from '@react-navigation/native';
+// import { Link } from '@react-navigation/native';
 import PostQuestionModal from './postQuestionModal';
 import { useNavigation } from '@react-navigation/native';
 
@@ -31,7 +31,7 @@ function HomePage() {
         >
           <List.Item
             title={question.content}
-            left={props => <List.Icon {...props} icon="folder" />}
+            left={props => <List.Icon {...props} icon="star" />}
           />
         </TouchableRipple>
       )
