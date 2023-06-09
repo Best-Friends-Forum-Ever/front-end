@@ -17,10 +17,11 @@ function ThreadPage () {
   const hideModal = () => setVisible(false);
 
   if(answersData){
-    answersToScreen = answersData.map(answer => {
+    answersToScreen = answersData.map((answer,idx) => {
       return(
         <List.Item
           title={answer.content}
+          key={idx}
           left={props => <List.Icon {...props} icon="folder" />}
         />
       )

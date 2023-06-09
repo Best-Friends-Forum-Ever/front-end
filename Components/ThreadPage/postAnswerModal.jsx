@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Modal, Portal, Button, TextInput } from 'react-native-paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { addAnswer } from '../../state/middleware/addAnswer';
+import { fetchAnswers } from '../../state/middleware/fetchAnswers';
 
 function PostAnswerModal ({visible, hideModal}){
 	let token = useSelector(currentState => currentState.profile.token);
@@ -12,6 +13,8 @@ function PostAnswerModal ({visible, hideModal}){
 
 	function handleSubmit () {
 		dispatch(addAnswer(selectedQuestion, answer, token));
+		dispatch(fetchAnswers(selectedQuestion));
+		hideModal();
 	}
 
 	return (

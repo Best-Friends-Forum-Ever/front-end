@@ -6,11 +6,9 @@ export const addAnswer = (questionId, answer, token) => async (dispatch) => {
     Authorization: `Bearer ${token}`, },
     body: JSON.stringify({ content: answer, questionId: questionId }),
   });
-  let data = await response.json();
-  console.log(data);
 
-  dispatch({
-    type: 'ADD_ANSWER',
-    payload: answer,
-  });
+  // dispatch({
+  //   type: 'ADD_ANSWER',
+  //   payload: answer,
+  // });
 }
